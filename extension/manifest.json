@@ -1,0 +1,29 @@
+{
+  "name": "StackTransFlow",
+  "version": "0.1.0",
+  "description": "Translate stackoverflow answers based on communities",
+  "homepage_url": "https://github.com/ruanyl/stacktransflow",
+  "manifest_version": 2,
+  "minimum_chrome_version": "45",
+  "permissions": [
+    "https://raw.githubusercontent.com/*",
+    "https://stackoverflow.com/*",
+    "http://stackoverflow.com/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://stackoverflow.com/*",
+        "http://stackoverflow.com/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "vendor/sprint.min.js",
+        "content.js"
+      ]
+    }
+  ]
+}
