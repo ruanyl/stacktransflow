@@ -17,6 +17,13 @@ function allAnswers() {
   return answerIds;
 }
 
+function getRawAnswer(answerId) {
+  return fetch('https://raw.githubusercontent.com/ruanyl/stacktransflow-data/master/java/3076078-3076081.md')
+  .then(function(res) {
+    return res.text();
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const answerIds = allAnswers();
 
@@ -46,6 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if(checked) {
       if(!postText.find('.stf-answer').length) {
         postText.prepend('<div class="stf-answer"></div>');
+        getRawAnswer(answerId).then(function(answer) {
+          postText.find('.stf-answer').html(answer);
+        });
       }
     } else {
       postText.find('.stf-answer').remove();
