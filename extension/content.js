@@ -3,6 +3,7 @@ const path = location.pathname;
 const matchQuestionPage = /^\/([\w\d]+)\/(\d+)\/.+/;
 const matchedUri = path.match(matchQuestionPage);
 const questionId = matchedUri ? matchedUri[2] : null;
+const md = window.markdownit();
 
 function getQuestionId() {
   let questionId = $('#question').attr('data-questionid');
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if(!postText.find('.stf-answer').length) {
         postText.prepend('<div class="stf-answer"></div>');
         getRawAnswer(answerId).then(function(answer) {
-          postText.find('.stf-answer').html(answer);
+          postText.find('.stf-answer').html(md.render(answer));
         });
       }
     } else {
