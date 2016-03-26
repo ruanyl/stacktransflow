@@ -3,7 +3,20 @@ const path = location.pathname;
 const matchQuestionPage = /^\/([\w\d]+)\/(\d+)\/.+/;
 const matchedUri = path.match(matchQuestionPage);
 const questionId = matchedUri ? matchedUri[2] : null;
-const md = window.markdownit();
+const hljs = window.hljs;
+const md = window.markdownit({
+  highlight: function(str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return '<pre class="hljs"><code>' +
+          hljs.highlight(lang, str, true).value +
+            '</code></pre>';
+      } catch (__) {}
+    }
+
+    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+  }
+});
 
 function getQuestionId() {
   let questionId = $('#question').attr('data-questionid');
@@ -23,6 +36,17 @@ function getRawAnswer(answerId) {
   .then(function(res) {
     return res.text();
   });
+}
+
+function loader() {
+  return [
+    '<div class="loader">',
+        '<h2>LOADING</h2>',
+        '<span></span>',
+        '<span></span>',
+        '<span></span>',
+    '</div>'
+  ].join('');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -54,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(checked) {
       if(!postText.find('.stf-answer').length) {
         postText.prepend('<div class="stf-answer"></div>');
+        postText.find('.stf-answer').html(loader());
         getRawAnswer(answerId).then(function(answer) {
           postText.find('.stf-answer').html(md.render(answer));
         });

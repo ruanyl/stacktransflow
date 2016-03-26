@@ -128,6 +128,64 @@
   opacity: 1;
   color: #fff;
 }
+/* source: http://codepen.io/hafizfattah/pen/AbBtc */
+.loader{
+  margin:50px auto;
+}
+.loader h2 {
+  color: #767d84;
+  font-size:16px;
+  letter-spacing:1px;
+  font-weight:200;
+  text-align:center;
+}
+.loader span{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  display:inline-block;
+  position:absolute;
+  left:50%;
+  margin-left:-10px;
+  -webkit-animation:3s infinite linear;
+  -moz-animation:3s infinite linear;
+  -o-animation:3s infinite linear;
+
+}
+.loader span:nth-child(2){
+  background:#E84C3D;
+  -webkit-animation:kiri 1.2s infinite linear;
+  -moz-animation:kiri 1.2s infinite linear;
+  -o-animation:kiri 1.2s infinite linear;
+}
+.loader span:nth-child(3){
+  background:#F1C40F;
+  z-index:100;
+}
+.loader span:nth-child(4){
+  background:#2FCC71;
+  -webkit-animation:kanan 1.2s infinite linear;
+  -moz-animation:kanan 1.2s infinite linear;
+  -o-animation:kanan 1.2s infinite linear;
+}
+@-webkit-keyframes kanan {
+  0% {-webkit-transform:translateX(20px);
+  }
+  50%{-webkit-transform:translateX(-20px);
+  }
+  100%{-webkit-transform:translateX(20px);
+    z-index:200;
+  }
+}
+@-webkit-keyframes kiri {
+  0% {-webkit-transform:translateX(-20px);
+    z-index:200;
+  }
+  50%{-webkit-transform:translateX(20px);
+  }
+  100%{-webkit-transform:translateX(-20px);
+  }
+}
 
 .answercell .post-text {
   position: relative;

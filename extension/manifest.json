@@ -18,10 +18,12 @@
         "http://stackoverflow.com/*"
       ],
       "css": [
+        "vendor/default.min.css",
         "content.css"
       ],
       "js": [
         "vendor/sprint.min.js",
+        "vendor/highlight.min.js",
         "vendor/markdown-it.min.js",
         "content.js"
       ]
